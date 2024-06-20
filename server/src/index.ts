@@ -25,7 +25,7 @@ const app: Express = express();
 const port = process.env.SERVER_PORT || 3000;
 
 app.get("/", (req: Request, res: Response) => {
-  res.send(dbConnCheck());
+  res.send({ code: 200, message: "Hello World!" });
 });
 
 app.listen(port, () => {
