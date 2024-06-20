@@ -1,8 +1,10 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import pg, { Pool } from "pg";
+import cors from "cors";
 
 dotenv.config();
+let counter = 0;
 
 const pool: Pool = new pg.Pool({
   host: process.env.POSTGRES_HOST,
@@ -20,12 +22,15 @@ async function dbConnCheck() {
     console.log("Database not connected");
   }
 }
+dbConnCheck();
 
 const app: Express = express();
 const port = process.env.SERVER_PORT || 3000;
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-  res.send({ code: 200, message: "Hello World!" });
+  counter = counter + 1;
+  res.json({ code: 200, message: `Hello World! x ${counter}` });
 });
 
 app.listen(port, () => {
