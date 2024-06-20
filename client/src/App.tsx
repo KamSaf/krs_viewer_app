@@ -1,6 +1,4 @@
 import "./App.css";
-import axios from "axios";
-import { Axios } from "axios";
 import { useState } from "react";
 
 function App() {
@@ -8,12 +6,8 @@ function App() {
 
   const handleClick = async () => {
     try {
-      const axiosInstance: Axios = axios.create({
-        baseURL: "http://localhost:3000",
-      });
-      await axiosInstance.get("/").then((response) => {
-        setMessage(response.data);
-      });
+      const url: string = "http://localhost:3000";
+      setMessage(await (await fetch(url + "/")).json());
     } catch (err) {
       console.log("Error occured when connecting to server");
     }
