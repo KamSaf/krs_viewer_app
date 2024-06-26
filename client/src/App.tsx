@@ -6,11 +6,17 @@ import { PaletteMode } from "@mui/material";
 import HomePage from "./routes/HomePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import NotFoundPage from "./routes/NotFound";
+import CompanyPage from "./routes/CompanyPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/:companyId/",
+    element: <CompanyPage />,
     errorElement: <NotFoundPage />,
   },
 ]);

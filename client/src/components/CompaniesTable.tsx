@@ -1,4 +1,12 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
+import CompanyTableFooter from "../components/CompanyTableFooter";
+import { useState } from "react";
+
+declare module "@mui/x-data-grid" {
+  interface FooterPropsOverrides {
+    rowSelected: boolean;
+  }
+}
 
 type Company = {
   id: number;
@@ -30,11 +38,15 @@ const rows: Company[] = [
 ];
 
 function CompaniesTable() {
+  const [rowSelected, setSelectRow] = useState(false);
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
+        onRowClick={() => {
+          setSelectRow(true);
+        }}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },
@@ -42,9 +54,12 @@ function CompaniesTable() {
         }}
         slots={{
           toolbar: GridToolbar,
+          footer: CompanyTableFooter,
+        }}
+        slotProps={{
+          footer: { rowSelected: rowSelected },
         }}
         pageSizeOptions={[5, 10]}
-        checkboxSelection
         disableMultipleRowSelection
       />
     </div>
