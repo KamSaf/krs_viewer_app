@@ -8,7 +8,8 @@ function CompanyTableFooter(
   props: NonNullable<GridSlotsComponentsProps["footer"]>
 ) {
   const navigate = useNavigate();
-
+  const companyName = props.companyData ? props.companyData.name : null;
+  const companyId = props.companyData ? props.companyData.id : null;
   return (
     <>
       <Divider />
@@ -18,14 +19,14 @@ function CompanyTableFooter(
             variant="contained"
             style={{ margin: 10 }}
             onClick={() =>
-              navigate("/companies/1", {
+              navigate("/companies/" + companyId?.toString(), {
                 state: {
-                  companyName: props.companyName,
-                  companyId: props.companyId,
+                  companyName: companyName,
+                  companyId: companyId,
                 },
               })
             }
-            disabled={!props.rowSelected}
+            disabled={!props.companyData}
           >
             View
           </Button>

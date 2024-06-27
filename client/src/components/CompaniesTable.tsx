@@ -2,20 +2,18 @@ import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import CompanyTableFooter from "../components/CompanyTableFooter";
 import { useState } from "react";
 
-declare module "@mui/x-data-grid" {
-  interface FooterPropsOverrides {
-    rowSelected: boolean;
-    companyName: string;
-    companyId: number;
-  }
-}
-
 type Company = {
   id: number;
   name: string;
   address: string;
   krs: string;
 };
+
+declare module "@mui/x-data-grid" {
+  interface FooterPropsOverrides {
+    companyData: Company | null;
+  }
+}
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -39,15 +37,26 @@ const rows: Company[] = [
   },
 ];
 
+function findRow(id: number): Company | null {
+  for (const row of rows) {
+    if (row.id === id) {
+      return row;
+    }
+  }
+  return null;
+}
+
 function CompaniesTable() {
-  const [rowSelected, setSelectRow] = useState(false);
+  const [selectedRowData, setSelectedRowData] = useState<Company | null>(null);
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
-        onRowClick={() => {
-          setSelectRow(true);
+        onRowSelectionModelChange={(id) => {
+          const selectedId = new Set(id).values().next().value;
+          setSelectedRowData(findRow(selectedId));
         }}
         initialState={{
           pagination: {
@@ -60,9 +69,7 @@ function CompaniesTable() {
         }}
         slotProps={{
           footer: {
-            rowSelected: rowSelected,
-            companyName: "COMPANY DUPA",
-            companyId: 1,
+            companyData: selectedRowData ? selectedRowData : null,
           },
         }}
         pageSizeOptions={[5, 10]}

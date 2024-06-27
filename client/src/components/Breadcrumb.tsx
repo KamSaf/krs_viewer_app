@@ -59,11 +59,11 @@ function NavBreadcrumbs() {
             const pathName = findBreadcrumbName(to, breadcrumbRoutesNames);
             return last ? (
               <Typography color="text.primary" key={to}>
-                {pathName} {location.state.companyId}
+                {pathName}
               </Typography>
             ) : (
               <LinkRouter underline="hover" color="primary" to={to} key={to}>
-                {pathName} {location.state.companyId}
+                {pathName}
               </LinkRouter>
             );
           })}
