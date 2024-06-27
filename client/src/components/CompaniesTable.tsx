@@ -5,6 +5,8 @@ import { useState } from "react";
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
     rowSelected: boolean;
+    companyName: string;
+    companyId: number;
   }
 }
 
@@ -57,7 +59,11 @@ function CompaniesTable() {
           footer: CompanyTableFooter,
         }}
         slotProps={{
-          footer: { rowSelected: rowSelected },
+          footer: {
+            rowSelected: rowSelected,
+            companyName: "COMPANY DUPA",
+            companyId: 1,
+          },
         }}
         pageSizeOptions={[5, 10]}
         disableMultipleRowSelection

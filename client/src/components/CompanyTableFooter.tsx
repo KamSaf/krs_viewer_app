@@ -17,7 +17,14 @@ function CompanyTableFooter(
           <Button
             variant="contained"
             style={{ margin: 10 }}
-            onClick={() => navigate("/1")}
+            onClick={() =>
+              navigate("/companies/1", {
+                state: {
+                  companyName: props.companyName,
+                  companyId: props.companyId,
+                },
+              })
+            }
             disabled={!props.rowSelected}
           >
             View
