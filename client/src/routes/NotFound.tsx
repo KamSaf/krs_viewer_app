@@ -14,7 +14,7 @@ export default function NotFoundPage() {
       >
         <h1>404 Not Found 🧐</h1>
         <Link component={RouterLink} underline="hover" to="/">
-          Go to Home Page
+          Return to Home Page
         </Link>
       </div>
     </>

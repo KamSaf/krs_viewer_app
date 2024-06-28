@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { GridPagination, GridSlotsComponentsProps } from "@mui/x-data-grid";
 import Divider from "@mui/material/Divider";
 import { useLocation, useNavigate } from "react-router-dom";
+import UploadFileButton from "./UploadFileButton";
 
 function ReportTableFooter(
   props: NonNullable<GridSlotsComponentsProps["footer"]>
@@ -33,6 +34,7 @@ function ReportTableFooter(
           >
             View
           </Button>
+          <UploadFileButton />
         </Grid>
         <Grid item xs={8}>
           <Box sx={{ justifyContent: "flex-end" }}>
