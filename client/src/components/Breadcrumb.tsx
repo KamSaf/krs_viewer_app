@@ -34,10 +34,15 @@ function LinkRouter(props: LinkRouterProps) {
 function NavBreadcrumbs() {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
+
   const breadcrumbRoutesNames: PathInfo[] = [
     {
       regex: /^\/companies\/\d+$/,
       name: location.state.companyName,
+    },
+    {
+      regex: /^\/reports\/\d+$/,
+      name: location.state.reportYears,
     },
   ];
 

@@ -7,6 +7,7 @@ import HomePage from "./routes/HomePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import NotFoundPage from "./routes/NotFound";
 import CompanyPage from "./routes/CompanyPage";
+import ReportPage from "./routes/ReportPage";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
   {
     path: "/companies/:companyId/",
     element: <CompanyPage />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/reports/:reportId/",
+    element: <ReportPage />,
     errorElement: <NotFoundPage />,
   },
 ]);

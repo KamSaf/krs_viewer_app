@@ -1,10 +1,23 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
+import { useState } from "react";
+import ReportTableFooter from "./ReportTableFooter";
+
+declare module "@mui/x-data-grid" {
+  interface FooterPropsOverrides {
+    reportData: ReportData | null;
+  }
+}
 
 type Report = {
   id: number;
   dateFrom: string;
   dateTo: string;
   status: string;
+};
+
+type ReportData = {
+  id: number;
+  years: string;
 };
 
 const columns: GridColDef[] = [
@@ -29,12 +42,38 @@ const rows: Report[] = [
   },
 ];
 
+function findRow(id: number): Report | null {
+  for (const row of rows) {
+    if (row.id === id) {
+      return row;
+    }
+  }
+  return null;
+}
+
 function ReportsTable() {
+  const [selectedRowData, setSelectedRowData] = useState<ReportData | null>(
+    null
+  );
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
+        onRowSelectionModelChange={(id) => {
+          const selectedId = new Set(id).values().next().value;
+          const row = findRow(selectedId);
+          if (row) {
+            const years =
+              row.dateFrom.split(".")[2] +
+              " - " +
+              (parseInt(row.dateTo.split(".")[2]) + 1).toString();
+            setSelectedRowData({
+              id: selectedId,
+              years: years,
+            });
+          }
+        }}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 5 },
@@ -42,9 +81,14 @@ function ReportsTable() {
         }}
         slots={{
           toolbar: GridToolbar,
+          footer: ReportTableFooter,
+        }}
+        slotProps={{
+          footer: {
+            reportData: selectedRowData,
+          },
         }}
         pageSizeOptions={[5, 10]}
-        checkboxSelection
         disableMultipleRowSelection
       />
     </div>
