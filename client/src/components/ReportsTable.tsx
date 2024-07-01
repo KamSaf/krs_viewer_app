@@ -1,8 +1,11 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReportTableFooter from "./ReportTableFooter";
 import type { Report } from "../../../common/types";
 import { findRow } from "../utils";
+import axios from "axios";
+import { Axios } from "axios";
+import { useParams } from "react-router-dom";
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
@@ -17,23 +20,21 @@ const columns: GridColDef[] = [
   { field: "status", headerName: "Status", width: 250 },
 ];
 
-const rows: Report[] = [
-  {
-    id: 1,
-    dateFrom: "01.01.2023",
-    dateTo: "31.12.2023",
-    status: "stonks",
-  },
-  {
-    id: 2,
-    dateFrom: "01.01.2022",
-    dateTo: "31.12.2022",
-    status: "no stonks",
-  },
-];
-
 function ReportsTable() {
+  const { companyId } = useParams();
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [rows, setRows] = useState<Report[]>([]);
+  const axiosInstance: Axios = axios.create({
+    baseURL: "http://localhost:3000",
+  });
+
+  useEffect(() => {
+    axiosInstance.get("/api/companies/" + companyId).then((response) => {
+      setRows(response.data);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid

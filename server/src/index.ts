@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { dbConnCheck } from "./utils";
 import { pool } from "./config";
-import type { Company } from "../../common/types";
+import type { Company, Report } from "../../common/types";
 
 dotenv.config();
 
@@ -34,6 +34,26 @@ app.get("/api/companies", (req: Request, res: Response) => {
   ];
 
   res.json(companies);
+});
+
+app.get("/api/companies/:id", (req: Request, res: Response) => {
+  // use id to find reports of chosen company
+  const reports: Report[] = [
+    {
+      id: 1,
+      dateFrom: "01.01.2023",
+      dateTo: "31.12.2023",
+      status: "stonks",
+    },
+    {
+      id: 2,
+      dateFrom: "01.01.2022",
+      dateTo: "31.12.2022",
+      status: "no stonks",
+    },
+  ];
+
+  res.json(reports);
 });
 
 app.listen(port, () => {
