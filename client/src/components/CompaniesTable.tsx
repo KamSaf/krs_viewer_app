@@ -11,7 +11,7 @@ type Company = {
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
-    companyData: Company | null;
+    companyId: number | null;
   }
 }
 
@@ -47,7 +47,7 @@ function findRow(id: number): Company | null {
 }
 
 function CompaniesTable() {
-  const [selectedRowData, setSelectedRowData] = useState<Company | null>(null);
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -56,7 +56,10 @@ function CompaniesTable() {
         columns={columns}
         onRowSelectionModelChange={(id) => {
           const selectedId = new Set(id).values().next().value;
-          setSelectedRowData(findRow(selectedId));
+          const row = findRow(selectedId);
+          if (row) {
+            setSelectedRowId(row.id);
+          }
         }}
         initialState={{
           pagination: {
@@ -69,7 +72,7 @@ function CompaniesTable() {
         }}
         slotProps={{
           footer: {
-            companyData: selectedRowData ? selectedRowData : null,
+            companyId: selectedRowId,
           },
         }}
         pageSizeOptions={[5, 10]}

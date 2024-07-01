@@ -4,7 +4,7 @@ import ReportTableFooter from "./ReportTableFooter";
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
-    reportData: ReportData | null;
+    reportId: number | null;
   }
 }
 
@@ -13,11 +13,6 @@ type Report = {
   dateFrom: string;
   dateTo: string;
   status: string;
-};
-
-type ReportData = {
-  id: number;
-  years: string;
 };
 
 const columns: GridColDef[] = [
@@ -52,9 +47,7 @@ function findRow(id: number): Report | null {
 }
 
 function ReportsTable() {
-  const [selectedRowData, setSelectedRowData] = useState<ReportData | null>(
-    null
-  );
+  const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -64,14 +57,7 @@ function ReportsTable() {
           const selectedId = new Set(id).values().next().value;
           const row = findRow(selectedId);
           if (row) {
-            const years =
-              row.dateFrom.split(".")[2] +
-              " - " +
-              (parseInt(row.dateTo.split(".")[2]) + 1).toString();
-            setSelectedRowData({
-              id: selectedId,
-              years: years,
-            });
+            setSelectedRowId(row.id);
           }
         }}
         initialState={{
@@ -85,7 +71,7 @@ function ReportsTable() {
         }}
         slotProps={{
           footer: {
-            reportData: selectedRowData,
+            reportId: selectedRowId,
           },
         }}
         pageSizeOptions={[5, 10]}

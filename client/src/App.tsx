@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/reports/:reportId/",
+    path: "/companies/reports/:reportId/",
     element: <ReportPage />,
     errorElement: <NotFoundPage />,
   },
