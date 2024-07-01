@@ -18,30 +18,34 @@ services:
 
   server:
     container_name: ${SERVER_HOST}
-    build: ./server
+    build:
+      context: ./
+      dockerfile: ./server/Dockerfile
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     env_file: .env
     networks:
       - krs_app
-    volumes:
-      - ./server:/server
-      - krs-server-node-modules-vol:/server/node_modules
+    # volumes:
+    #   - ./server:/server
+    #   - krs-server-node-modules-vol:/server/node_modules
     depends_on:
       postgres-db:
         condition: service_healthy
 
   client:
     container_name: ${CLIENT_HOST}
-    build: ./client
+    build:
+      context: ./
+      dockerfile: ./client/Dockerfile
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
     env_file: .env
     networks:
       - krs_app
-    volumes:
-      - ./client:/client
-      - krs-client-node-modules-vol:/client/node_modules
+    # volumes:
+      # - ./client:/client
+      # - krs-client-node-modules-vol:/client/node_modules
 
 networks:
   krs_app:

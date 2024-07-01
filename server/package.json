@@ -2,10 +2,9 @@
   "name": "krs_viewer_app",
   "version": "1.0.0",
   "description": "Web application for viewing company financial data based on KRS yearly reports in .xml format.",
-  "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/server/src/index.js",
     "dev": "nodemon src/index.ts"
   },
   "author": "Kamil Safaryjski",

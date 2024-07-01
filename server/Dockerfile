@@ -2,9 +2,11 @@ FROM node:slim
 
 ENV NODE_ENV development
 
-WORKDIR /express-docker
+COPY ./server /express-docker/server
 
-COPY . .
+COPY ./common /express-docker/common
+
+WORKDIR /express-docker/server
 
 RUN npm install
 

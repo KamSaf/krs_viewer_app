@@ -2,9 +2,11 @@ FROM node:slim
 
 ENV NODE_ENV development
 
-WORKDIR /react-docker
+COPY ./client /react-docker/client
 
-COPY . .
+COPY ./common /express-docker/common
+
+WORKDIR /react-docker/client
 
 RUN npm install
 
