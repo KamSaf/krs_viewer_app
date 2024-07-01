@@ -1,27 +1,11 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import pg, { Pool } from "pg";
 import cors from "cors";
+import { dbConnCheck } from "./utils";
 
 dotenv.config();
 let counter = 0;
 
-const pool: Pool = new pg.Pool({
-  host: process.env.POSTGRES_HOST,
-  port: parseInt(process.env.POSTGRES_PORT || "5432"),
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DB,
-});
-
-async function dbConnCheck() {
-  try {
-    await pool.connect();
-    console.log("Database connected");
-  } catch (err) {
-    console.log("Database not connected");
-  }
-}
 dbConnCheck();
 
 const app: Express = express();
