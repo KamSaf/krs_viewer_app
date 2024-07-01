@@ -1,13 +1,7 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import CompanyTableFooter from "../components/CompanyTableFooter";
 import { useState } from "react";
-
-type Company = {
-  id: number;
-  name: string;
-  address: string;
-  krs: string;
-};
+import { Company } from "../../../common/types";
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {

@@ -1,19 +1,13 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { useState } from "react";
 import ReportTableFooter from "./ReportTableFooter";
+import { Report } from "../../../common/types";
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
     reportId: number | null;
   }
 }
-
-type Report = {
-  id: number;
-  dateFrom: string;
-  dateTo: string;
-  status: string;
-};
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
