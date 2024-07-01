@@ -1,12 +1,14 @@
-import { pool } from "./config";
+import { Pool } from "pg";
 
-async function dbConnCheck() {
-  try {
-    await pool.connect();
-    console.log("Database connected");
-  } catch (err) {
-    console.log("Database not connected");
-  }
+function dbConnCheck(pool: Pool) {
+  pool
+    .connect()
+    .then(() => {
+      console.log("Database connected");
+    })
+    .catch(() => {
+      throw new Error("Error: Database not connected");
+    });
 }
 
 export { dbConnCheck };

@@ -1,7 +1,8 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { useState } from "react";
 import ReportTableFooter from "./ReportTableFooter";
-import { Report } from "../../../common/types";
+import type { Report } from "../../../common/types";
+import { findRow } from "../utils";
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
@@ -31,15 +32,6 @@ const rows: Report[] = [
   },
 ];
 
-function findRow(id: number): Report | null {
-  for (const row of rows) {
-    if (row.id === id) {
-      return row;
-    }
-  }
-  return null;
-}
-
 function ReportsTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   return (
@@ -49,7 +41,7 @@ function ReportsTable() {
         columns={columns}
         onRowSelectionModelChange={(id) => {
           const selectedId = new Set(id).values().next().value;
-          const row = findRow(selectedId);
+          const row = findRow(selectedId, rows);
           if (row) {
             setSelectedRowId(row.id);
           }

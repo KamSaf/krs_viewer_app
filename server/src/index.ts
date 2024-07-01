@@ -2,19 +2,38 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { dbConnCheck } from "./utils";
+import { pool } from "./config";
+import type { Company } from "../../common/types";
 
 dotenv.config();
-let counter = 0;
 
-dbConnCheck();
+dbConnCheck(pool);
 
 const app: Express = express();
 const port = process.env.SERVER_PORT || 3000;
 app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-  counter = counter + 1;
-  res.json({ code: 200, message: `Hello World! x ${counter}` });
+  res.json({ message: "Hello!" });
+});
+
+app.get("/api/companies", (req: Request, res: Response) => {
+  const companies: Company[] = [
+    {
+      id: 1,
+      name: "Revolve Healthcare",
+      address: "Katowice, ul. Porcelanowa 23 40-246",
+      krs: "0000972657",
+    },
+    {
+      id: 2,
+      name: "Neubloc Polska",
+      address: "Katowice, ul. Grabowa 2 40-172",
+      krs: "0000335382",
+    },
+  ];
+
+  res.json(companies);
 });
 
 app.listen(port, () => {

@@ -1,7 +1,10 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import CompanyTableFooter from "../components/CompanyTableFooter";
-import { useState } from "react";
-import { Company } from "../../../common/types";
+import { useState, useEffect } from "react";
+import type { Company } from "../../../common/types";
+import axios from "axios";
+import { Axios } from "axios";
+import { findRow } from "../utils";
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
@@ -16,32 +19,19 @@ const columns: GridColDef[] = [
   { field: "krs", headerName: "KRS", width: 250 },
 ];
 
-const rows: Company[] = [
-  {
-    id: 1,
-    name: "Revolve Healthcare",
-    address: "Katowice, ul. Porcelanowa 23 40-246",
-    krs: "0000972657",
-  },
-  {
-    id: 2,
-    name: "Neubloc Polska",
-    address: "Katowice, ul. Grabowa 2 40-172",
-    krs: "0000335382",
-  },
-];
-
-function findRow(id: number): Company | null {
-  for (const row of rows) {
-    if (row.id === id) {
-      return row;
-    }
-  }
-  return null;
-}
-
 function CompaniesTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [rows, setRows] = useState<Company[]>([]);
+  const axiosInstance: Axios = axios.create({
+    baseURL: "http://localhost:3000",
+  });
+
+  useEffect(() => {
+    axiosInstance.get("/api/companies").then((response) => {
+      setRows(response.data);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -50,7 +40,7 @@ function CompaniesTable() {
         columns={columns}
         onRowSelectionModelChange={(id) => {
           const selectedId = new Set(id).values().next().value;
-          const row = findRow(selectedId);
+          const row = findRow(selectedId, rows);
           if (row) {
             setSelectedRowId(row.id);
           }
