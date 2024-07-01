@@ -30,9 +30,7 @@ function Navbar() {
               </Link>
             </Typography>
             <FormControlLabel
-              control={
-                <ThemeButton sx={{ m: 1 }} defaultChecked={theme != "light"} />
-              }
+              control={<ThemeButton sx={{ m: 1 }} checked={theme != "light"} />}
               label=""
               onClick={() => dispatch(toggleTheme())}
             />
