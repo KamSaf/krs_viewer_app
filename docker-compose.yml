@@ -5,6 +5,8 @@ services:
     env_file: .env
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    networks:
+      - krs_app
     volumes:
       - krs-database-vol:/var/lib/postgresql/data
     healthcheck:
@@ -20,6 +22,8 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     env_file: .env
+    networks:
+      - krs_app
     volumes:
       - ./server:/server
       - krs-server-node-modules-vol:/server/node_modules
@@ -27,8 +31,26 @@ services:
       postgres-db:
         condition: service_healthy
 
+  client:
+    container_name: ${CLIENT_HOST}
+    build: ./client
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    env_file: .env
+    networks:
+      - krs_app
+    volumes:
+      - ./client:/client
+      - krs-client-node-modules-vol:/client/node_modules
+
+networks:
+  krs_app:
+    driver: bridge
+
 volumes:
   krs-server-node-modules-vol:
     name: "krs-server-node-modules-vol"
   krs-database-vol:
     name: "krs-database-vol"
+  krs-client-node-modules-vol:
+    name: "krs-client-node-modules-vol"
