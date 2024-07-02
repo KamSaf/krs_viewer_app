@@ -37,15 +37,6 @@ const rows: Company[] = [
   },
 ];
 
-function findRow(id: number): Company | null {
-  for (const row of rows) {
-    if (row.id === id) {
-      return row;
-    }
-  }
-  return null;
-}
-
 function CompaniesTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
@@ -54,9 +45,8 @@ function CompaniesTable() {
       <DataGrid
         rows={rows}
         columns={columns}
-        onRowSelectionModelChange={(id) => {
-          const selectedId = new Set(id).values().next().value;
-          const row = findRow(selectedId);
+        onRowSelectionModelChange={(ids) => {
+          const row = rows.find((r) => r.id === ids[0]);
           if (row) {
             setSelectedRowId(row.id);
           }

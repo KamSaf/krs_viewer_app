@@ -37,15 +37,6 @@ const rows: Report[] = [
   },
 ];
 
-function findRow(id: number): Report | null {
-  for (const row of rows) {
-    if (row.id === id) {
-      return row;
-    }
-  }
-  return null;
-}
-
 function ReportsTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   return (
@@ -53,9 +44,8 @@ function ReportsTable() {
       <DataGrid
         rows={rows}
         columns={columns}
-        onRowSelectionModelChange={(id) => {
-          const selectedId = new Set(id).values().next().value;
-          const row = findRow(selectedId);
+        onRowSelectionModelChange={(ids) => {
+          const row = rows.find((r) => r.id === ids[0]);
           if (row) {
             setSelectedRowId(row.id);
           }
