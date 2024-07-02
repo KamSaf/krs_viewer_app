@@ -28,11 +28,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const mode = useSelector(
+    (state: RootState) => state.config.theme
+  ) as PaletteMode;
   const theme = createTheme({
     palette: {
-      mode: useSelector(
-        (state: RootState) => state.config.theme
-      ) as PaletteMode,
+      mode: mode,
     },
   });
 
