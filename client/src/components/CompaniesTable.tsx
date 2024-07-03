@@ -1,6 +1,7 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import CompanyTableFooter from "../components/CompanyTableFooter";
 import { useState } from "react";
+import TableDiv from "./TableDiv";
 
 type Company = {
   id: number;
@@ -41,7 +42,7 @@ function CompaniesTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <TableDiv>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -68,7 +69,7 @@ function CompaniesTable() {
         pageSizeOptions={[5, 10]}
         disableMultipleRowSelection
       />
-    </div>
+    </TableDiv>
   );
 }
 

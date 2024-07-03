@@ -1,6 +1,7 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { useState } from "react";
 import ReportTableFooter from "./ReportTableFooter";
+import TableDiv from "./TableDiv";
 
 declare module "@mui/x-data-grid" {
   interface FooterPropsOverrides {
@@ -40,7 +41,7 @@ const rows: Report[] = [
 function ReportsTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <TableDiv>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -67,7 +68,7 @@ function ReportsTable() {
         pageSizeOptions={[5, 10]}
         disableMultipleRowSelection
       />
-    </div>
+    </TableDiv>
   );
 }
 
