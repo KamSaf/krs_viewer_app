@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../state/store";
-import { toggleTheme } from "../state/slices/configSlice";
+import { toggleTheme } from "../state/slices/configSlice/slice";
 import { FormControlLabel } from "@mui/material";
 import ThemeSwitch from "./ThemeSwitch";
 import { Link as RouterLink } from "react-router-dom";

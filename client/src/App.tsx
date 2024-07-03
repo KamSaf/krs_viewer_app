@@ -1,7 +1,7 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSelector } from "react-redux";
-import { RootState } from "./state/store";
+import { selectTheme } from "./state/slices/configSlice/selectors";
 import { PaletteMode } from "@mui/material";
 import HomePage from "./routes/HomePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -28,9 +28,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const mode = useSelector(
-    (state: RootState) => state.config.theme
-  ) as PaletteMode;
+  const mode = useSelector(selectTheme) as PaletteMode;
   const theme = createTheme({
     palette: {
       mode: mode,

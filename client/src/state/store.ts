@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import configReducer from "./slices/configSlice.ts";
+import configReducer from "./slices/configSlice/slice.ts";
 import {
   persistReducer,
   FLUSH,
