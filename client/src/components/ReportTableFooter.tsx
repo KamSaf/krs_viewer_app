@@ -16,8 +16,8 @@ function ReportTableFooter(
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <ViewButton
-            url={location.pathname + "/" + props.reportId}
-            disabled={!props.reportId}
+            url={location.pathname + "/" + props.rowId}
+            disabled={!props.rowId}
           />
           <UploadFileButton />
         </Grid>

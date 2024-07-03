@@ -3,12 +3,6 @@ import { useState } from "react";
 import ReportTableFooter from "./ReportTableFooter";
 import TableDiv from "./TableDiv";
 
-declare module "@mui/x-data-grid" {
-  interface FooterPropsOverrides {
-    reportId: number | null;
-  }
-}
-
 type Report = {
   id: number;
   dateFrom: string;
@@ -62,7 +56,7 @@ function ReportsTable() {
         }}
         slotProps={{
           footer: {
-            reportId: selectedRowId,
+            rowId: selectedRowId,
           },
         }}
         pageSizeOptions={[5, 10]}

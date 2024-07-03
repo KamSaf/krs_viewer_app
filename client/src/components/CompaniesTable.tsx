@@ -10,12 +10,6 @@ type Company = {
   krs: string;
 };
 
-declare module "@mui/x-data-grid" {
-  interface FooterPropsOverrides {
-    companyId: number | null;
-  }
-}
-
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "name", headerName: "Company name", width: 250 },
@@ -63,7 +57,7 @@ function CompaniesTable() {
         }}
         slotProps={{
           footer: {
-            companyId: selectedRowId,
+            rowId: selectedRowId,
           },
         }}
         pageSizeOptions={[5, 10]}

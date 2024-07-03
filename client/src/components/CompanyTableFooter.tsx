@@ -14,8 +14,8 @@ function CompanyTableFooter(
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <ViewButton
-            url={"/companies/" + props.companyId + "/reports"}
-            disabled={!props.companyId}
+            url={"/companies/" + props.rowId + "/reports"}
+            disabled={!props.rowId}
           />
           <UploadFileButton />
         </Grid>
