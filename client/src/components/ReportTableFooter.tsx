@@ -2,14 +2,14 @@ import { Box, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import { GridPagination, GridSlotsComponentsProps } from "@mui/x-data-grid";
 import Divider from "@mui/material/Divider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UploadFileButton from "./UploadFileButton";
 
 function ReportTableFooter(
   props: NonNullable<GridSlotsComponentsProps["footer"]>
 ) {
   const navigate = useNavigate();
-
+  const location = useLocation();
   return (
     <>
       <Divider />
@@ -18,7 +18,7 @@ function ReportTableFooter(
           <Button
             variant="contained"
             style={{ margin: 10 }}
-            onClick={() => navigate("/companies/reports/" + props.reportId)}
+            onClick={() => navigate(location.pathname + "/" + props.reportId)}
             disabled={!props.reportId}
           >
             View

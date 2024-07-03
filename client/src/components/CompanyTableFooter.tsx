@@ -17,7 +17,9 @@ function CompanyTableFooter(
           <Button
             variant="contained"
             style={{ margin: 10 }}
-            onClick={() => navigate("/companies/" + props.companyId)}
+            onClick={() =>
+              navigate("/companies/" + props.companyId + "/reports")
+            }
             disabled={!props.companyId}
           >
             View

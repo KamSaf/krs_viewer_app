@@ -16,12 +16,12 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/companies/:companyId/",
+    path: "/companies/:company_id/reports",
     element: <CompanyPage />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/companies/reports/:reportId/",
+    path: "/companies/:company_id/reports/:report_id/",
     element: <ReportPage />,
     errorElement: <NotFoundPage />,
   },
