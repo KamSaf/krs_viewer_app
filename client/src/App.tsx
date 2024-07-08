@@ -1,7 +1,7 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSelector } from "react-redux";
-import { RootState } from "./state/store";
+import { selectTheme } from "./state/slices/configSlice/selectors";
 import { PaletteMode } from "@mui/material";
 import HomePage from "./routes/HomePage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -16,23 +16,22 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/companies/:companyId/",
+    path: "/companies/:company_id/reports",
     element: <CompanyPage />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/companies/reports/:reportId/",
+    path: "/companies/:company_id/reports/:report_id/",
     element: <ReportPage />,
     errorElement: <NotFoundPage />,
   },
 ]);
 
 function App() {
+  const mode = useSelector(selectTheme) as PaletteMode;
   const theme = createTheme({
     palette: {
-      mode: useSelector(
-        (state: RootState) => state.config.theme
-      ) as PaletteMode,
+      mode: mode,
     },
   });
 

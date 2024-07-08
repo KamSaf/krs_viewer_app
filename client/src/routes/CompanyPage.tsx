@@ -1,7 +1,7 @@
-import ReportsTable from "../components/ReportsTable.tsx";
+import ReportsTable from "../components/ReportsTable";
 import Navbar from "../components/Navbar";
 import Container from "@mui/material/Container";
-import NavBreadcrumbs from "../components/Breadcrumb.tsx";
+import NavBreadcrumbs from "../components/Breadcrumb";
 
 function CompanyPage() {
   return (

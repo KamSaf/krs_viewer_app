@@ -1,8 +1,9 @@
 import Link, { LinkProps } from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import { Link as RouterLink, useLocation, useParams } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import { Grid } from "@mui/material";
+import { styled } from "@mui/system";
 
 interface LinkRouterProps extends LinkProps {
   state?: { companyId: number; companyName: string };
@@ -10,56 +11,69 @@ interface LinkRouterProps extends LinkProps {
   replace?: boolean;
 }
 
+type PathPattern = {
+  reg: RegExp;
+  label: string;
+  url: string;
+};
+
+const RootGrid = styled(Grid)({
+  margin: 2,
+});
+
 function LinkRouter(props: LinkRouterProps) {
   return <Link {...props} component={RouterLink} />;
 }
 
+function createLink(to: string, label: string, isLast: boolean) {
+  return isLast ? (
+    <Typography color="text.primary" key={to}>
+      {label}
+    </Typography>
+  ) : (
+    <LinkRouter underline="hover" color="primary" to={to} key={to}>
+      {label}
+    </LinkRouter>
+  );
+}
+
 function NavBreadcrumbs() {
-  // eslint-disable-next-line prefer-const
-  let { companyId, reportId } = useParams();
-  if (!companyId) {
-    companyId = "1"; // hardcoded until data can be fetched from the server
-  }
-  const location = useLocation();
-  const pathnames = location.pathname.split("/").filter((x) => {
-    if (isNaN(parseInt(x))) {
-      return x;
+  const { company_id, report_id } = useParams();
+  const pathnames = location.pathname.split("/");
+
+  const pathPatterns: PathPattern[] = [
+    {
+      reg: /^\/companies\/\d+\/reports$/,
+      label: "COMPANY NAME",
+      url: `/companies/${company_id}/reports`,
+    },
+    {
+      reg: /^\/companies\/\d+\/reports\/\d+$/,
+      label: "REPORT YEARS",
+      url: `/companies/${company_id}/reports/${report_id}`,
+    },
+  ];
+  const links = pathnames.map((_value, index) => {
+    const last = index === pathnames.length - 1;
+    const path = pathnames.slice(0, index + 1).join("/");
+    for (const patt of pathPatterns) {
+      if (path.match(patt.reg)) {
+        return createLink(patt.url, patt.label, last);
+      }
     }
   });
-  const breadcrumbNameMap: { [key: string]: string[] } = {
-    "/companies": ["COMPANY NAME", "/companies/" + companyId], // hardcoded until data can be fetched from the server
-    "/companies/reports": ["REPORT YEARS", "/companies/reports/" + reportId], // hardcoded until data can be fetched from the server
-  };
-
   return (
-    <Grid container spacing={2} style={{ margin: 2 }}>
+    <RootGrid container spacing={2}>
       <Grid item xs={4}>
-        <Breadcrumbs aria-label="breadcrumb">
+        <Breadcrumbs>
           <LinkRouter underline="hover" color="primary" to="/">
             Home
           </LinkRouter>
-          {pathnames.map((_value, index) => {
-            const last = index === pathnames.length - 1;
-            const to = `/${pathnames.slice(0, index + 1).join("/")}`;
-            return last ? (
-              <Typography color="text.primary" key={breadcrumbNameMap[to][1]}>
-                {breadcrumbNameMap[to][0]}
-              </Typography>
-            ) : (
-              <LinkRouter
-                underline="hover"
-                color="primary"
-                to={breadcrumbNameMap[to][1]}
-                key={breadcrumbNameMap[to][1]}
-              >
-                {breadcrumbNameMap[to][0]}
-              </LinkRouter>
-            );
-          })}
+          {links}
         </Breadcrumbs>
       </Grid>
       <Grid item xs={8} />
-    </Grid>
+    </RootGrid>
   );
 }
 

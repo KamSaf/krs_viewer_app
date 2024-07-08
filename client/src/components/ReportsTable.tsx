@@ -1,17 +1,11 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import ReportTableFooter from "./ReportTableFooter";
+import TableDiv from "./TableDiv";
 import type { Report } from "../../../common/types";
-import { findRow } from "../utils";
 import axios from "axios";
 import { Axios } from "axios";
 import { useParams } from "react-router-dom";
-
-declare module "@mui/x-data-grid" {
-  interface FooterPropsOverrides {
-    reportId: number | null;
-  }
-}
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -36,13 +30,12 @@ function ReportsTable() {
   }, []);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <TableDiv>
       <DataGrid
         rows={rows}
         columns={columns}
-        onRowSelectionModelChange={(id) => {
-          const selectedId = new Set(id).values().next().value;
-          const row = findRow(selectedId, rows);
+        onRowSelectionModelChange={(ids) => {
+          const row = rows.find((r) => r.id === ids[0]);
           if (row) {
             setSelectedRowId(row.id);
           }
@@ -58,13 +51,13 @@ function ReportsTable() {
         }}
         slotProps={{
           footer: {
-            reportId: selectedRowId,
+            rowId: selectedRowId,
           },
         }}
         pageSizeOptions={[5, 10]}
         disableMultipleRowSelection
       />
-    </div>
+    </TableDiv>
   );
 }
 

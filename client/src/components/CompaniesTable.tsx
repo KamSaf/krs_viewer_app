@@ -1,16 +1,10 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import CompanyTableFooter from "../components/CompanyTableFooter";
+import TableDiv from "./TableDiv";
 import { useState, useEffect } from "react";
 import type { Company } from "../../../common/types";
 import axios from "axios";
 import { Axios } from "axios";
-import { findRow } from "../utils";
-
-declare module "@mui/x-data-grid" {
-  interface FooterPropsOverrides {
-    companyId: number | null;
-  }
-}
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -34,13 +28,12 @@ function CompaniesTable() {
   }, []);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <TableDiv>
       <DataGrid
         rows={rows}
         columns={columns}
-        onRowSelectionModelChange={(id) => {
-          const selectedId = new Set(id).values().next().value;
-          const row = findRow(selectedId, rows);
+        onRowSelectionModelChange={(ids) => {
+          const row = rows.find((r) => r.id === ids[0]);
           if (row) {
             setSelectedRowId(row.id);
           }
@@ -56,13 +49,13 @@ function CompaniesTable() {
         }}
         slotProps={{
           footer: {
-            companyId: selectedRowId,
+            rowId: selectedRowId,
           },
         }}
         pageSizeOptions={[5, 10]}
         disableMultipleRowSelection
       />
-    </div>
+    </TableDiv>
   );
 }
 
