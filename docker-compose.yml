@@ -27,8 +27,20 @@ services:
       postgres-db:
         condition: service_healthy
 
+  client:
+    container_name: ${CLIENT_HOST}
+    build: ./client
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    env_file: .env
+    volumes:
+      - ./client:/client
+      - krs-client-node-modules-vol:/client/node_modules
+
 volumes:
   krs-server-node-modules-vol:
     name: "krs-server-node-modules-vol"
   krs-database-vol:
     name: "krs-database-vol"
+  krs-client-node-modules-vol:
+    name: "krs-client-node-modules-vol"
