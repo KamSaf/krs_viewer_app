@@ -66,3 +66,4 @@ package-lock.json
 /lib/
 dist/
 volumes/
+/server/sample_data/
