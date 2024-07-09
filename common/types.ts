@@ -7,6 +7,7 @@ type Company = {
 
 type Report = {
   id: number;
+  companyId: number;
   dateFrom: string;
   dateTo: string;
   status: string;

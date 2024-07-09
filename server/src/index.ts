@@ -13,10 +13,6 @@ const app: Express = express();
 const port = process.env.SERVER_PORT || 3000;
 app.use(cors());
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Hello!" });
-});
-
 app.get("/api/companies", (req: Request, res: Response) => {
   const companies: Company[] = [
     {
@@ -36,24 +32,41 @@ app.get("/api/companies", (req: Request, res: Response) => {
   res.json(companies);
 });
 
-app.get("/api/companies/:id", (req: Request, res: Response) => {
-  // use id to find reports of chosen company
+app.get("/api/companies/:id/reports", (req: Request, res: Response) => {
   const reports: Report[] = [
     {
       id: 1,
+      companyId: 1,
       dateFrom: "01.01.2023",
       dateTo: "31.12.2023",
       status: "stonks",
     },
     {
       id: 2,
+      companyId: 1,
       dateFrom: "01.01.2022",
       dateTo: "31.12.2022",
       status: "no stonks",
     },
+    {
+      id: 3,
+      companyId: 2,
+      dateFrom: "01.01.2019",
+      dateTo: "31.12.2019",
+      status: "stonks",
+    },
+    {
+      id: 4,
+      companyId: 2,
+      dateFrom: "01.01.2020",
+      dateTo: "31.12.2001",
+      status: "no stonks",
+    },
   ];
-
-  res.json(reports);
+  const data = reports.filter(
+    (rep) => rep.companyId === parseInt(req.params.id)
+  );
+  res.json(data);
 });
 
 app.listen(port, () => {

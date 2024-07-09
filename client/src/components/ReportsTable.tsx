@@ -15,7 +15,7 @@ const columns: GridColDef[] = [
 ];
 
 function ReportsTable() {
-  const { companyId } = useParams();
+  const { company_id } = useParams();
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [rows, setRows] = useState<Report[]>([]);
   const axiosInstance: Axios = axios.create({
@@ -23,9 +23,11 @@ function ReportsTable() {
   });
 
   useEffect(() => {
-    axiosInstance.get("/api/companies/" + companyId).then((response) => {
-      setRows(response.data);
-    });
+    axiosInstance
+      .get(`/api/companies/${company_id}/reports`)
+      .then((response) => {
+        setRows(response.data);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
