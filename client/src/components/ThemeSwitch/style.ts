@@ -1,9 +1,10 @@
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
-import SunIcon from "../assets/icons/sun.svg";
-import MoonIcon from "../assets/icons/moon.svg";
+import SunIcon from "../../assets/icons/sun.svg";
+import MoonIcon from "../../assets/icons/moon.svg";
 
-const ThemeSwitch = styled(Switch)(({ theme }) => ({
+const StyledSwitch = styled(Switch)(({ theme }) => ({
+  margin: 4,
   width: 64,
   height: 38,
   padding: 8,
@@ -46,4 +47,4 @@ const ThemeSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default ThemeSwitch;
+export { StyledSwitch };

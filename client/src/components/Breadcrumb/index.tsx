@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { Grid } from "@mui/material";
-import { styled } from "@mui/system";
+import { RootGrid } from "./style";
 
 interface LinkRouterProps extends LinkProps {
   state?: { companyId: number; companyName: string };
@@ -16,10 +16,6 @@ type PathPattern = {
   label: string;
   url: string;
 };
-
-const RootGrid = styled(Grid)({
-  margin: 2,
-});
 
 function LinkRouter(props: LinkRouterProps) {
   return <Link {...props} component={RouterLink} />;

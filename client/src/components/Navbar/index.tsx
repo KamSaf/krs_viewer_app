@@ -1,27 +1,13 @@
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../state/store";
-import { toggleTheme } from "../state/slices/configSlice/slice";
+import { RootState } from "../../state/store";
+import { toggleTheme } from "../../state/slices/configSlice/slice";
 import { FormControlLabel } from "@mui/material";
-import ThemeSwitch from "./ThemeSwitch";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
-import { styled } from "@mui/system";
-
-const Switch = styled(ThemeSwitch)({
-  margin: 4,
-});
-
-const NavbarBox = styled(Box)({
-  flexGrow: 1,
-});
-
-const NavbarTypography = styled(Typography)({
-  flexGrow: 1,
-});
+import { NavbarBox, NavbarTypography } from "./style";
+import ThemeSwitch from "../ThemeSwitch";
 
 function Navbar() {
   const theme = useSelector((state: RootState) => state.config.theme);
@@ -43,7 +29,7 @@ function Navbar() {
               </Link>
             </NavbarTypography>
             <FormControlLabel
-              control={<Switch checked={theme != "light"} />}
+              control={<ThemeSwitch theme={theme} />}
               label=""
               onClick={() => dispatch(toggleTheme())}
             />

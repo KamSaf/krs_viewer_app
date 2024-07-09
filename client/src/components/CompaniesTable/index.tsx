@@ -1,8 +1,8 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
-import CompanyTableFooter from "../components/CompanyTableFooter";
-import TableDiv from "./TableDiv";
+import CompaniesTableFooter from "../CompaniesTableFooter";
+import TableDiv from "../TableDiv";
 import { useState, useEffect } from "react";
-import type { Company } from "../../../common/types";
+import type { Company } from "../../../../common/types";
 import axios from "axios";
 import { Axios } from "axios";
 
@@ -45,7 +45,7 @@ function CompaniesTable() {
         }}
         slots={{
           toolbar: GridToolbar,
-          footer: CompanyTableFooter,
+          footer: CompaniesTableFooter,
         }}
         slotProps={{
           footer: {

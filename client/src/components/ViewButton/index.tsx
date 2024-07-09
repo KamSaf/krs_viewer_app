@@ -1,15 +1,10 @@
-import Button from "@mui/material/Button";
-import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { StyledButton } from "./style";
 
 type ViewButtonProps = {
   url: string;
   disabled: boolean;
 };
-
-const StyledButton = styled(Button)({
-  margin: 10,
-});
 
 function ViewButton({ url, disabled }: ViewButtonProps) {
   const navigate = useNavigate();

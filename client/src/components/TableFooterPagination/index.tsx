@@ -1,10 +1,6 @@
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { GridPagination } from "@mui/x-data-grid";
-import { styled } from "@mui/system";
-
-const FooterPaginationBox = styled(Box)({
-  justifyContent: "flex-end",
-});
+import { FooterPaginationBox } from "./style";
 
 function FooterPagination() {
   return (

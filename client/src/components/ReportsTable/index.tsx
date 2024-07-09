@@ -1,8 +1,8 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
-import ReportTableFooter from "./ReportTableFooter";
-import TableDiv from "./TableDiv";
-import type { Report } from "../../../common/types";
+import ReportTableFooter from "../ReportsTableFooter";
+import TableDiv from "../TableDiv";
+import type { Report } from "../../../../common/types";
 import axios from "axios";
 import { Axios } from "axios";
 import { useParams } from "react-router-dom";
