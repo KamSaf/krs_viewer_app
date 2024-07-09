@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
-function UploadFileButton() {
+function UploadButton() {
   return (
     <Button
       component="label"
@@ -15,4 +15,4 @@ function UploadFileButton() {
   );
 }
 
-export default UploadFileButton;
+export default UploadButton;

@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import { GridSlotsComponentsProps } from "@mui/x-data-grid";
 import Divider from "@mui/material/Divider";
 import { useLocation } from "react-router-dom";
-import UploadFileButton from "../UploadButton";
+import UploadButton from "../UploadButton";
 import FooterPagination from "../TableFooterPagination";
 import ViewButton from "../ViewButton";
 
@@ -19,7 +19,7 @@ function ReportTableFooter(
             url={location.pathname + "/" + props.rowId}
             disabled={!props.rowId}
           />
-          <UploadFileButton />
+          <UploadButton />
         </Grid>
         <FooterPagination />
       </Grid>

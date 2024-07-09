@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { GridSlotsComponentsProps } from "@mui/x-data-grid";
 import Divider from "@mui/material/Divider";
-import UploadFileButton from "../UploadButton";
+import UploadButton from "../UploadButton";
 import FooterPagination from "../TableFooterPagination";
 import ViewButton from "../ViewButton";
 
@@ -17,7 +17,7 @@ function CompaniesTableFooter(
             url={"/companies/" + props.rowId + "/reports"}
             disabled={!props.rowId}
           />
-          <UploadFileButton />
+          <UploadButton />
         </Grid>
         <FooterPagination />
       </Grid>
