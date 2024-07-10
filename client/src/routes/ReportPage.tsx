@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar";
-import NavBreadcrumbs from "../components/Breadcrumb";
+import Navbar from "@components/Navbar";
+import NavBreadcrumbs from "@components/Breadcrumb";
 
 function ReportPage() {
   return (

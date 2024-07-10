@@ -1,8 +1,8 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
-import CompaniesTableFooter from "../CompaniesTableFooter";
-import TableDiv from "../TableDiv";
+import CompaniesTableFooter from "@components/CompaniesTableFooter";
+import TableDiv from "@components/TableDiv";
 import { useState, useEffect } from "react";
-import type { Company } from "../../../../common/types";
+import type { Company } from "@common/types";
 import axios from "axios";
 import { Axios } from "axios";
 

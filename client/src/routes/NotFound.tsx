@@ -1,6 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
-import Navbar from "../components/Navbar";
+import Navbar from "@components/Navbar";
 
 export default function NotFoundPage() {
   return (

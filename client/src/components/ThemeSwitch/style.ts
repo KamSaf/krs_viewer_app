@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
-import SunIcon from "../../assets/icons/sun.svg";
-import MoonIcon from "../../assets/icons/moon.svg";
+import SunIcon from "@assets/icons/sun.svg";
+import MoonIcon from "@assets/icons/moon.svg";
 
 const StyledSwitch = styled(Switch)(({ theme }) => ({
   margin: 4,

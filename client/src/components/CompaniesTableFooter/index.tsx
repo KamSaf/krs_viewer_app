@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
 import { GridSlotsComponentsProps } from "@mui/x-data-grid";
 import Divider from "@mui/material/Divider";
-import UploadButton from "../UploadButton";
-import FooterPagination from "../TableFooterPagination";
-import ViewButton from "../ViewButton";
+import UploadButton from "@components/UploadButton";
+import FooterPagination from "@components/TableFooterPagination";
+import ViewButton from "@components/ViewButton";
 
 function CompaniesTableFooter(
   props: NonNullable<GridSlotsComponentsProps["footer"]>

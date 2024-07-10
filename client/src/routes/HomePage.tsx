@@ -1,5 +1,5 @@
-import CompaniesTable from "../components/CompaniesTable";
-import Navbar from "../components/Navbar";
+import CompaniesTable from "@components/CompaniesTable";
+import Navbar from "@components/Navbar";
 import Container from "@mui/material/Container";
 
 function HomePage() {

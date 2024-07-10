@@ -2,9 +2,9 @@ import { Grid } from "@mui/material";
 import { GridSlotsComponentsProps } from "@mui/x-data-grid";
 import Divider from "@mui/material/Divider";
 import { useLocation } from "react-router-dom";
-import UploadButton from "../UploadButton";
-import FooterPagination from "../TableFooterPagination";
-import ViewButton from "../ViewButton";
+import UploadButton from "@components/UploadButton";
+import FooterPagination from "@components/TableFooterPagination";
+import ViewButton from "@components/ViewButton";
 
 function ReportTableFooter(
   props: NonNullable<GridSlotsComponentsProps["footer"]>

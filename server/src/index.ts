@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { dbConnCheck } from "./utils";
 import { pool } from "./config";
-import type { Company, Report } from "../../common/types";
+import type { Company, Report } from "@common/types";
 import sample_companies from "../sample_data/companies.json";
 import sample_reports from "../sample_data/reports.json";
 
