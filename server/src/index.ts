@@ -1,15 +1,12 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { dbConnCheck } from "./utils";
-import { pool } from "./config";
+import db from "./db";
 import type { Company, Report } from "@common/types";
 import sample_companies from "../sample_data/companies.json";
 import sample_reports from "../sample_data/reports.json";
 
 dotenv.config();
-
-dbConnCheck(pool);
 
 const app: Express = express();
 const port = process.env.SERVER_PORT || 3000;
