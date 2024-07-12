@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import ReportTableFooter from "@components/ReportsTableFooter";
 import TableDiv from "@components/TableDiv";
 import type { Report } from "@common/types";
-import axios from "axios";
-import { Axios } from "axios";
 import { useParams } from "react-router-dom";
+import { axiosInstance } from "src/axios/instance";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -18,9 +17,6 @@ function ReportsTable() {
   const { company_id } = useParams();
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [rows, setRows] = useState<Report[]>([]);
-  const axiosInstance: Axios = axios.create({
-    baseURL: "http://localhost:3000",
-  });
 
   useEffect(() => {
     axiosInstance
