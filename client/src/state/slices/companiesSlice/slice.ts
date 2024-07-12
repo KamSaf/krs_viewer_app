@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Company } from "@common/types";
-import { axiosInstance } from "../../../axios/instance";
+import { axiosInstance } from "@axiosInstance/instance";
 
 interface CompaniesState {
   companies: Company[];

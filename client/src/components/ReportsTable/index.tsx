@@ -2,9 +2,11 @@ import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import ReportTableFooter from "@components/ReportsTableFooter";
 import TableDiv from "@components/TableDiv";
-import type { Report } from "@common/types";
 import { useParams } from "react-router-dom";
-import { axiosInstance } from "src/axios/instance";
+import { fetchReports } from "@state/slices/reportsSlice/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@state/store";
+import { selectReports } from "@state/slices/reportsSlice/selectors";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -16,16 +18,15 @@ const columns: GridColDef[] = [
 function ReportsTable() {
   const { company_id } = useParams();
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-  const [rows, setRows] = useState<Report[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    axiosInstance
-      .get(`/api/companies/${company_id}/reports`)
-      .then((response) => {
-        setRows(response.data);
-      });
+    if (company_id) {
+      dispatch(fetchReports(company_id));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const rows = useSelector(selectReports).reports;
 
   return (
     <TableDiv>

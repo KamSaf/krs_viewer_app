@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import configReducer from "./slices/configSlice/slice";
 import companiesReducer from "./slices/companiesSlice/slice";
+import reportsReducer from "./slices/reportsSlice/slice";
 
 import {
   persistReducer,
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   config: configReducer,
   companies: companiesReducer,
+  reports: reportsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
