@@ -15,7 +15,7 @@ const columns: GridColDef[] = [
   { field: "status", headerName: "Status", width: 250 },
 ];
 
-function ReportsTable() {
+export default function ReportsTable() {
   const { company_id } = useParams();
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const dispatch = useDispatch<AppDispatch>();
@@ -59,5 +59,3 @@ function ReportsTable() {
     </TableDiv>
   );
 }
-
-export default ReportsTable;

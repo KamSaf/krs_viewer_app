@@ -5,4 +5,4 @@ const StyledButton = styled(Button)({
   margin: 10,
 });
 
-export { StyledButton };
+export default StyledButton;

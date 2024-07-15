@@ -6,7 +6,7 @@ import UploadButton from "@components/UploadButton";
 import FooterPagination from "@components/TableFooterPagination";
 import ViewButton from "@components/ViewButton";
 
-function ReportTableFooter(
+export default function ReportTableFooter(
   props: NonNullable<GridSlotsComponentsProps["footer"]>
 ) {
   const location = useLocation();
@@ -26,5 +26,3 @@ function ReportTableFooter(
     </>
   );
 }
-
-export default ReportTableFooter;

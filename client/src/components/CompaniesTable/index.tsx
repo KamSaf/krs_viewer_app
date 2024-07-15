@@ -14,7 +14,7 @@ const columns: GridColDef[] = [
   { field: "krs", headerName: "KRS", width: 250 },
 ];
 
-function CompaniesTable() {
+export default function CompaniesTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -55,5 +55,3 @@ function CompaniesTable() {
     </TableDiv>
   );
 }
-
-export default CompaniesTable;

@@ -1,6 +1,6 @@
 import { Pool } from "pg";
 
-function dbConnCheck(pool: Pool) {
+export function dbConnCheck(pool: Pool) {
   pool
     .connect()
     .then(() => {
@@ -10,5 +10,3 @@ function dbConnCheck(pool: Pool) {
       throw new Error("Error: Database not connected");
     });
 }
-
-export { dbConnCheck };

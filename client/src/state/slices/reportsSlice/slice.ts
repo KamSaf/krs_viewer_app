@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Report } from "@common/types";
-import { axiosInstance } from "@axiosInstance/instance";
+import axiosInstance from "@axiosInstance/instance";
 
 interface ReportsState {
   reports: Report[];

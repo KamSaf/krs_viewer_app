@@ -9,7 +9,7 @@ import Link from "@mui/material/Link";
 import { NavbarBox, NavbarTypography } from "./style";
 import ThemeSwitch from "@components/ThemeSwitch";
 
-function Navbar() {
+export default function Navbar() {
   const theme = useSelector((state: RootState) => state.config.theme);
   const dispatch = useDispatch();
 
@@ -39,5 +39,3 @@ function Navbar() {
     </div>
   );
 }
-
-export default Navbar;

@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-function App() {
+export default function App() {
   const mode = useSelector(selectTheme) as PaletteMode;
   const theme = createTheme({
     palette: {
@@ -42,5 +42,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;
