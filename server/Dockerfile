@@ -8,13 +8,13 @@ COPY ./server/package.json /express-docker/server
 
 COPY ./server/package-lock.json /express-docker/server
 
-COPY ./common /express-docker/common
-
 WORKDIR /express-docker/server
 
 RUN npm install
 
-COPY ./server /express-docker/server
+COPY ./common ../common
+
+COPY ./server .
 
 RUN npm run build
 
