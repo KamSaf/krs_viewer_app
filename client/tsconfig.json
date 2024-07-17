@@ -12,6 +12,8 @@
       "@state/*": ["./src/state/*"],
       "@routes/*": ["./src/routes/*"],
       "@components/*": ["./src/components/*"],
+      "@axiosInstance/*": ["./src/axios/*"],
+
     },
 
     /* Bundler mode */

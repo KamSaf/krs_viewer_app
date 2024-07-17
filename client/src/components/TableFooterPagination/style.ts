@@ -5,4 +5,4 @@ const FooterPaginationBox = styled(Box)({
   justifyContent: "flex-end",
 });
 
-export { FooterPaginationBox };
+export default FooterPaginationBox;

@@ -1,5 +1,3 @@
 import { RootState } from "@state/store";
 
-const selectTheme = (state: RootState) => state.config.theme;
-
-export { selectTheme };
+export const selectTheme = (state: RootState) => state.config.theme;

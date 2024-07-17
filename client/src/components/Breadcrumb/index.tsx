@@ -33,7 +33,7 @@ function createLink(to: string, label: string, isLast: boolean) {
   );
 }
 
-function NavBreadcrumbs() {
+export default function NavBreadcrumbs() {
   const { company_id, report_id } = useParams();
   const pathnames = location.pathname.split("/");
 
@@ -72,5 +72,3 @@ function NavBreadcrumbs() {
     </RootGrid>
   );
 }
-
-export default NavBreadcrumbs;

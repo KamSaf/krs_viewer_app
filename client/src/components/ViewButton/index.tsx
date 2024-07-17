@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { StyledButton } from "./style";
+import StyledButton from "./style";
 
 type ViewButtonProps = {
   url: string;
   disabled: boolean;
 };
 
-function ViewButton({ url, disabled }: ViewButtonProps) {
+export default function ViewButton({ url, disabled }: ViewButtonProps) {
   const navigate = useNavigate();
   return (
     <StyledButton
@@ -18,5 +18,3 @@ function ViewButton({ url, disabled }: ViewButtonProps) {
     </StyledButton>
   );
 }
-
-export default ViewButton;

@@ -47,4 +47,4 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export { StyledSwitch };
+export default StyledSwitch;

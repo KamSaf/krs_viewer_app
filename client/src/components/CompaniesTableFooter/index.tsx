@@ -5,7 +5,7 @@ import UploadButton from "@components/UploadButton";
 import FooterPagination from "@components/TableFooterPagination";
 import ViewButton from "@components/ViewButton";
 
-function CompaniesTableFooter(
+export default function CompaniesTableFooter(
   props: NonNullable<GridSlotsComponentsProps["footer"]>
 ) {
   return (
@@ -24,5 +24,3 @@ function CompaniesTableFooter(
     </>
   );
 }
-
-export default CompaniesTableFooter;

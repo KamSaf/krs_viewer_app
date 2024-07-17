@@ -2,7 +2,7 @@ import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import Navbar from "@components/Navbar";
 
-function NotFoundPage() {
+export default function NotFoundPage() {
   return (
     <>
       <Navbar />
@@ -20,5 +20,3 @@ function NotFoundPage() {
     </>
   );
 }
-
-export default NotFoundPage;

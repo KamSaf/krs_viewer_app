@@ -1,30 +1,20 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import db from "./db";
-import type { Company, Report } from "@common/types";
-import sample_companies from "../sample_data/companies.json";
-import sample_reports from "../sample_data/reports.json";
+import { pool } from "./db";
+import { init } from "./utils";
+import { companiesRouter } from "./routers/companiesRouter";
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.SERVER_PORT || 3000;
-app.use(cors());
+app.use(cors(), express.json({ limit: "15mb" }));
+app.use("/api/companies", companiesRouter);
 
-app.get("/api/companies", (req: Request, res: Response) => {
-  const companies: Company[] = [...sample_companies];
-  res.json(companies);
-});
-
-app.get("/api/companies/:id/reports", (req: Request, res: Response) => {
-  const reports: Report[] = [...sample_reports];
-  const data = reports.filter(
-    (rep) => rep.companyId === parseInt(req.params.id)
+init(app, pool).catch((err) => {
+  console.error(
+    "\x1b[31m✘\x1b[0m[server]: Unexpected error while booting the server\n",
+    err
   );
-  res.json(data);
-});
-
-app.listen(port, () => {
-  console.log(`\n\n⚡️[server]: Server is running at http://localhost:${port}`);
+  process.exit(1);
 });

@@ -3,7 +3,7 @@ import Navbar from "@components/Navbar";
 import NavBreadcrumbs from "@components/Breadcrumb";
 import Container from "@mui/material/Container";
 
-function CompanyPage() {
+export default function CompanyPage() {
   return (
     <>
       <Navbar />
@@ -19,5 +19,3 @@ function CompanyPage() {
     </>
   );
 }
-
-export default CompanyPage;

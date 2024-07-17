@@ -2,9 +2,10 @@ import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import CompaniesTableFooter from "@components/CompaniesTableFooter";
 import TableDiv from "@components/TableDiv";
 import { useState, useEffect } from "react";
-import type { Company } from "@common/types";
-import axios from "axios";
-import { Axios } from "axios";
+import { fetchCompanies } from "@state/slices/companiesSlice/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@state/store";
+import { selectCompanies } from "@state/slices/companiesSlice/selectors";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -13,19 +14,15 @@ const columns: GridColDef[] = [
   { field: "krs", headerName: "KRS", width: 250 },
 ];
 
-function CompaniesTable() {
+export default function CompaniesTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
-  const [rows, setRows] = useState<Company[]>([]);
-  const axiosInstance: Axios = axios.create({
-    baseURL: "http://localhost:3000",
-  });
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    axiosInstance.get("/api/companies").then((response) => {
-      setRows(response.data);
-    });
+    dispatch(fetchCompanies());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const rows = useSelector(selectCompanies).companies;
 
   return (
     <TableDiv>
@@ -58,5 +55,3 @@ function CompaniesTable() {
     </TableDiv>
   );
 }
-
-export default CompaniesTable;

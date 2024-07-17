@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
 import { GridPagination } from "@mui/x-data-grid";
-import { FooterPaginationBox } from "./style";
+import FooterPaginationBox from "./style";
 
-function FooterPagination() {
+export default function FooterPagination() {
   return (
     <Grid item xs={8}>
       <FooterPaginationBox>
@@ -11,5 +11,3 @@ function FooterPagination() {
     </Grid>
   );
 }
-
-export default FooterPagination;
