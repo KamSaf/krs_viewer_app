@@ -6,7 +6,8 @@
     "build": "npx tsc",
     "start": "node dist/server/src/index.js",
     "dev": "nodemon src/index.ts",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx ts-node src/drizzle/migrate.ts"
   },
   "author": "Kamil Safaryjski",
   "license": "ISC",
