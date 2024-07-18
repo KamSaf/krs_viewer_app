@@ -10,5 +10,5 @@ export type Report = {
   companyId: number;
   dateFrom: string | Date;
   dateTo: string | Date;
-  status: string;
+  status: "stonks" | "no stonks";
 };

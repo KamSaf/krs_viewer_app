@@ -7,6 +7,11 @@ export function getCompanies(): Company[] {
 }
 
 export function getCompanyReports(id: number): Report[] {
-  const reports: Report[] = [...sample_reports];
+  const reports: Report[] = sample_reports.map((report) => {
+    return {
+      ...report,
+      status: report.status as "stonks" | "no stonks",
+    };
+  });
   return reports.filter((rep) => rep.companyId === id);
 }
