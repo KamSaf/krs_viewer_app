@@ -8,7 +8,7 @@ export type Company = {
 export type Report = {
   id: number;
   companyId: number;
-  dateFrom: string;
-  dateTo: string;
+  dateFrom: string | Date;
+  dateTo: string | Date;
   status: string;
 };
