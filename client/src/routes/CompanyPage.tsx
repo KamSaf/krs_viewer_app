@@ -1,9 +1,9 @@
-import ReportsTable from "../components/ReportsTable";
-import Navbar from "../components/Navbar";
+import ReportsTable from "@components/ReportsTable";
+import Navbar from "@components/Navbar";
+import NavBreadcrumbs from "@components/Breadcrumb";
 import Container from "@mui/material/Container";
-import NavBreadcrumbs from "../components/Breadcrumb";
 
-function CompanyPage() {
+export default function CompanyPage() {
   return (
     <>
       <Navbar />
@@ -19,5 +19,3 @@ function CompanyPage() {
     </>
   );
 }
-
-export default CompanyPage;

@@ -7,6 +7,7 @@ interface ConfigState {
 const initialState: ConfigState = {
   theme: "light",
 };
+
 const configSlice = createSlice({
   name: "config",
   initialState: initialState,

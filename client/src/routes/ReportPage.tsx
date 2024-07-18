@@ -1,7 +1,7 @@
-import Navbar from "../components/Navbar";
-import NavBreadcrumbs from "../components/Breadcrumb";
+import Navbar from "@components/Navbar";
+import NavBreadcrumbs from "@components/Breadcrumb";
 
-function ReportPage() {
+export default function ReportPage() {
   return (
     <>
       <Navbar />
@@ -18,5 +18,3 @@ function ReportPage() {
     </>
   );
 }
-
-export default ReportPage;

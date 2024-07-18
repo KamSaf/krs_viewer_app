@@ -1,14 +1,11 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
-import CompanyTableFooter from "../components/CompanyTableFooter";
-import { useState } from "react";
-import TableDiv from "./TableDiv";
-
-type Company = {
-  id: number;
-  name: string;
-  address: string;
-  krs: string;
-};
+import CompaniesTableFooter from "@components/CompaniesTableFooter";
+import TableDiv from "@components/TableDiv";
+import { useState, useEffect } from "react";
+import { fetchCompanies } from "@state/slices/companiesSlice/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@state/store";
+import { selectCompanies } from "@state/slices/companiesSlice/selectors";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -17,23 +14,15 @@ const columns: GridColDef[] = [
   { field: "krs", headerName: "KRS", width: 250 },
 ];
 
-const rows: Company[] = [
-  {
-    id: 1,
-    name: "Revolve Healthcare",
-    address: "Katowice, ul. Porcelanowa 23 40-246",
-    krs: "0000972657",
-  },
-  {
-    id: 2,
-    name: "Neubloc Polska",
-    address: "Katowice, ul. Grabowa 2 40-172",
-    krs: "0000335382",
-  },
-];
-
-function CompaniesTable() {
+export default function CompaniesTable() {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchCompanies());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const rows = useSelector(selectCompanies).companies;
 
   return (
     <TableDiv>
@@ -53,7 +42,7 @@ function CompaniesTable() {
         }}
         slots={{
           toolbar: GridToolbar,
-          footer: CompanyTableFooter,
+          footer: CompaniesTableFooter,
         }}
         slotProps={{
           footer: {
@@ -66,5 +55,3 @@ function CompaniesTable() {
     </TableDiv>
   );
 }
-
-export default CompaniesTable;

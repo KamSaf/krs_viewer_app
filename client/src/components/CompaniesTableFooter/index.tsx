@@ -1,30 +1,26 @@
 import { Grid } from "@mui/material";
 import { GridSlotsComponentsProps } from "@mui/x-data-grid";
 import Divider from "@mui/material/Divider";
-import { useLocation } from "react-router-dom";
-import UploadFileButton from "./UploadFileButton";
-import FooterPagination from "./TableFooterPagination";
-import ViewButton from "./ViewButton";
+import UploadButton from "@components/UploadButton";
+import FooterPagination from "@components/TableFooterPagination";
+import ViewButton from "@components/ViewButton";
 
-function ReportTableFooter(
+export default function CompaniesTableFooter(
   props: NonNullable<GridSlotsComponentsProps["footer"]>
 ) {
-  const location = useLocation();
   return (
     <>
       <Divider />
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <ViewButton
-            url={location.pathname + "/" + props.rowId}
+            url={"/companies/" + props.rowId + "/reports"}
             disabled={!props.rowId}
           />
-          <UploadFileButton />
+          <UploadButton />
         </Grid>
         <FooterPagination />
       </Grid>
     </>
   );
 }
-
-export default ReportTableFooter;
