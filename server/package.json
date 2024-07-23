@@ -4,8 +4,11 @@
   "description": "Web application for viewing company financial data based on KRS yearly reports in .xml format.",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/server/src/index.js",
-    "dev": "nodemon src/index.ts"
+    "start": "node dist/server/src/app.js",
+    "dev": "nodemon src/app.ts",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx ts-node src/drizzle/migrate.ts",
+    "db:load": "npx ts-node sample_data/load_data.ts"
   },
   "author": "Kamil Safaryjski",
   "license": "ISC",
@@ -13,6 +16,7 @@
     "@types/cors": "^2.8.17",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.32.0",
     "express": "^4.19.2",
     "pg": "^8.12.0"
   },
@@ -22,6 +26,7 @@
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.2",
     "@types/pg": "^8.11.6",
+    "drizzle-kit": "^0.23.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.2",
     "globals": "^15.6.0",

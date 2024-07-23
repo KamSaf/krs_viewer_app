@@ -7,6 +7,7 @@ import { fetchReports } from "@state/slices/reportsSlice/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@state/store";
 import { selectReports } from "@state/slices/reportsSlice/selectors";
+import dayjs from "dayjs";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -26,7 +27,14 @@ export default function ReportsTable() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const rows = useSelector(selectReports).reports;
+  const dateFormat = "DD.MM.YYYY";
+  const rows = useSelector(selectReports).reports.map((rep) => {
+    return {
+      ...rep,
+      dateFrom: dayjs(rep.dateFrom).format(dateFormat),
+      dateTo: dayjs(rep.dateTo).format(dateFormat),
+    };
+  });
 
   return (
     <TableDiv>

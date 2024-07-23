@@ -1,11 +1,8 @@
 import express, { Express } from "express";
-import dotenv from "dotenv";
 import cors from "cors";
+import { pool } from "./db";
 import { init } from "./utils";
-import { pool } from "./config";
 import { companiesRouter } from "./routers/companiesRouter";
-
-dotenv.config();
 
 const app: Express = express();
 app.use(cors(), express.json({ limit: "15mb" }));

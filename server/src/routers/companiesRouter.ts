@@ -4,10 +4,12 @@ import { getCompanies, getCompanyReports } from "../services/companiesServices";
 
 export const companiesRouter = Router();
 
-companiesRouter.get("/", (_req: Request, res: Response) => {
-  res.json(getCompanies());
+companiesRouter.get("/", async (_req: Request, res: Response) => {
+  const data = await getCompanies();
+  res.json(data);
 });
 
-companiesRouter.get("/:id/reports", (req: Request, res: Response) => {
-  res.json(getCompanyReports(parseInt(req.params.id)));
+companiesRouter.get("/:id/reports", async (req: Request, res: Response) => {
+  const data = await getCompanyReports(parseInt(req.params.id));
+  res.json(data);
 });

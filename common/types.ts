@@ -3,12 +3,14 @@ export type Company = {
   name: string;
   address: string;
   krs: string;
+  create_date?: Date;
 };
 
 export type Report = {
   id: number;
   companyId: number;
-  dateFrom: string;
-  dateTo: string;
-  status: string;
+  dateFrom: string | Date;
+  dateTo: string | Date;
+  status: "stonks" | "no stonks";
+  create_date?: Date;
 };

@@ -1,12 +1,11 @@
 import type { Company, Report } from "@common/types";
-import sample_companies from "../../sample_data/companies.json";
-import sample_reports from "../../sample_data/reports.json";
+import { findCompanies } from "../queries/companyQueries";
+import { findReports } from "../queries/reportQueries";
 
-export function getCompanies(): Company[] {
-  return [...sample_companies] as Company[];
+export async function getCompanies(): Promise<Company[]> {
+  return await findCompanies();
 }
 
-export function getCompanyReports(id: number): Report[] {
-  const reports: Report[] = [...sample_reports];
-  return reports.filter((rep) => rep.companyId === id);
+export async function getCompanyReports(companyId: number): Promise<Report[]> {
+  return await findReports(companyId);
 }

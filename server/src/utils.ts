@@ -19,3 +19,8 @@ export async function init(app: Express, pool: Pool): Promise<void> {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
   });
 }
+
+export function parseDate(date: string): Date {
+  const [day, month, year] = date.split(".").map(Number);
+  return new Date(year, month - 1, day);
+}
