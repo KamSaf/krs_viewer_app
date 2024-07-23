@@ -27,11 +27,12 @@ export default function ReportsTable() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const dateFormat = "DD.MM.YYYY";
   const rows = useSelector(selectReports).reports.map((rep) => {
     return {
       ...rep,
-      dateFrom: dayjs(rep.dateFrom).format("DD.MM.YYYY"),
-      dateTo: dayjs(rep.dateTo).format("DD.MM.YYYY"),
+      dateFrom: dayjs(rep.dateFrom).format(dateFormat),
+      dateTo: dayjs(rep.dateTo).format(dateFormat),
     };
   });
 
