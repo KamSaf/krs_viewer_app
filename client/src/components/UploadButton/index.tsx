@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { ChangeEvent, useState } from "react";
 import InvalidFileModal from "@components/InvalidFileModal";
+import axiosInstance from "@axiosInstance/instance";
 
 export default function UploadButton() {
   const [modalMessage, setModalMessage] = useState<string | null>(null);
@@ -18,7 +19,16 @@ export default function UploadButton() {
       );
       return;
     }
-    console.log(file.name);
+    console.log(file);
+    const formData = new FormData();
+    formData.append("file", file);
+    axiosInstance
+      .post("/api/reports/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        setModalMessage(res.data);
+      });
   }
 
   return (
