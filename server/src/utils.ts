@@ -1,6 +1,7 @@
 import { Express } from "express";
 import { Pool } from "pg";
-import fs from "fs";
+// import fs from "fs";
+import fs from "node:fs/promises";
 
 async function dbConnCheck(pool: Pool): Promise<void> {
   try {
@@ -26,19 +27,10 @@ export function parseDate(date: string): Date {
   return new Date(year, month - 1, day);
 }
 
-export function readFileContent(path: string): string | void {
-  const reader = fs.createReadStream(path, "utf-8");
-  const fileContent: string[] = [];
+export async function readFileContent(path: string): Promise<string | void> {
   try {
-    reader
-      .on("data", (chunk) => {
-        fileContent.push(chunk.toString());
-        console.log(fileContent);
-      })
-      .on("end", () => {
-        return fileContent;
-      });
+    return fs.readFile(path, { encoding: "utf-8" });
   } catch (err) {
-    throw new Error("Error occurred while trying to read the file");
+    throw new Error("Error occured when reading report file");
   }
 }

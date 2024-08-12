@@ -9,12 +9,13 @@ const uploader = multer({ dest: "uploads/" });
 reportsRouter.post(
   "/upload",
   uploader.single("file"),
-  (req: Request, res: Response) => {
+  async (req: Request, res: Response) => {
     try {
-      console.log(processFile(req.file));
-      res.json("Upload operation successfull");
+      const data = await processFile(req.file);
+      console.log(data);
+      res.status(200).json("Data processed!");
     } catch (err) {
-      res.json(err);
+      res.status(500).json(err);
     }
   }
 );
