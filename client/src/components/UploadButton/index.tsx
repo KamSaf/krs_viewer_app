@@ -1,13 +1,14 @@
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { ChangeEvent, useState } from "react";
-import InvalidFileModal from "@components/InvalidFileModal";
+import FileUploadModal from "@components/FileUploadModal";
 import axiosInstance from "@axiosInstance/instance";
+import { AxiosError } from "axios";
 
 export default function UploadButton() {
   const [modalMessage, setModalMessage] = useState<string | null>(null);
 
-  function handleUpload(event: ChangeEvent<HTMLInputElement>) {
+  async function handleUpload(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files ? event.target.files[0] : null;
     if (file == null) {
       setModalMessage("No file uploaded");
@@ -21,32 +22,26 @@ export default function UploadButton() {
     }
     const formData = new FormData();
     formData.append("file", file);
-    axiosInstance
-      .post("/api/reports/upload", formData, {
+    try {
+      const data = await axiosInstance.post("/api/reports/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
-      })
-      .catch((error) => {
-        // const code = error.response.status;
-        // console.log(error);
-        setModalMessage(error.response.data);
-        // if (code == 500) {
-        //   setModalMessage(
-        //     "Internal server error occured while processing file"
-        //   );
-        // } else if (code == 400) {
-        //   setModalMessage("Invalid file uploaded");
-        // } else {
-        //   setModalMessage("Unexpected error occured");
-        // }
-      })
-      .then((res) => {
-        if (res) setModalMessage(res.data);
       });
+      console.log(data);
+    } catch (err) {
+      const error = err as AxiosError;
+      let message = `Unexpected error: ${error.code}`;
+      if (error.response) {
+        message = error.response.data as string;
+      } else if (error.code == "ERR_NETWORK") {
+        message = "Cannot communicate with server";
+      }
+      setModalMessage(message);
+    }
   }
 
   return (
     <>
-      <InvalidFileModal
+      <FileUploadModal
         modalMessage={modalMessage}
         setModalMessage={setModalMessage}
       />

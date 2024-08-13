@@ -6,7 +6,7 @@ import { RootState } from "@state/store";
 import { Box, Button, createTheme, PaletteMode } from "@mui/material";
 import Divider from "@mui/material/Divider";
 
-export default function InvalidFileModal({
+export default function FileUploadModal({
   modalMessage,
   setModalMessage,
 }: {
@@ -28,7 +28,7 @@ export default function InvalidFileModal({
     >
       <ModalBox theme={theme}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          File upload failed!
+          File upload failed
         </Typography>
         <Divider />
         <Box>
