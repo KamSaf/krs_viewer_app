@@ -26,16 +26,18 @@ export default function UploadButton() {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .catch((error) => {
-        const code = error.response.status;
-        if (code == 500) {
-          setModalMessage(
-            "Internal server error occured while processing file"
-          );
-        } else if (code == 400) {
-          setModalMessage("Invalid file uploaded");
-        } else {
-          setModalMessage("Unexpected error occured");
-        }
+        // const code = error.response.status;
+        // console.log(error);
+        setModalMessage(error.response.data);
+        // if (code == 500) {
+        //   setModalMessage(
+        //     "Internal server error occured while processing file"
+        //   );
+        // } else if (code == 400) {
+        //   setModalMessage("Invalid file uploaded");
+        // } else {
+        //   setModalMessage("Unexpected error occured");
+        // }
       })
       .then((res) => {
         if (res) setModalMessage(res.data);

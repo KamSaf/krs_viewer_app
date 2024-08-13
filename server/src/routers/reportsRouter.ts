@@ -2,7 +2,7 @@ import { Router } from "express";
 import { Request, Response } from "express";
 import multer from "multer";
 import { processFile } from "../services/reportsServices";
-import { FileProcessingError } from "../errors/reportErrors";
+import { FileProcessingError, EmptyFileError } from "../errors/reportErrors";
 
 export const reportsRouter = Router();
 const uploader = multer({ dest: "uploads/" });
@@ -16,10 +16,10 @@ reportsRouter.post(
       console.log(data);
       res.status(201).json("Data processed");
     } catch (err) {
-      if (err instanceof FileProcessingError) {
-        res.status(400).json(err);
+      if (err instanceof FileProcessingError || err instanceof EmptyFileError) {
+        res.status(400).json(err.message);
       } else {
-        res.status(500).json(err);
+        res.status(500).json("Internal server error");
       }
     }
   }

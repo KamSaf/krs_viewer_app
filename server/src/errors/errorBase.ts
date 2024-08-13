@@ -1,9 +1,9 @@
 export default abstract class ErrorBase extends Error {
   public name: string;
   public message: string;
-  public cause: Error;
+  public cause?: Error;
 
-  constructor(message: string, cause: Error) {
+  constructor(message: string, cause?: Error) {
     super(message);
     this.name = this.constructor.name;
     this.message = message;
