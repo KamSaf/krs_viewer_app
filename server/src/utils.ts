@@ -1,7 +1,7 @@
 import { Express } from "express";
 import { Pool } from "pg";
-// import fs from "fs";
 import fs from "node:fs/promises";
+import { FileReadingError } from "./errors/reportErrors";
 
 async function dbConnCheck(pool: Pool): Promise<void> {
   try {
@@ -29,8 +29,8 @@ export function parseDate(date: string): Date {
 
 export async function readFileContent(path: string): Promise<string | void> {
   try {
-    return fs.readFile(path, { encoding: "utf-8" });
+    return await fs.readFile(path, { encoding: "utf-8" });
   } catch (err) {
-    throw new Error("Error occured when reading report file");
+    throw new FileReadingError(err as Error);
   }
 }

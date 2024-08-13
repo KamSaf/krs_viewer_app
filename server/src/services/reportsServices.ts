@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { readFileContent } from "../utils";
 import xml2js from "xml2js";
+import { FileProcessingError } from "../errors/reportErrors";
 
 export const reportsRouter = Router();
 
@@ -25,7 +26,7 @@ export async function processFile(
   let endResult = null;
   xml2js.parseString(fileContent, { mergeAttrs: true }, (err, result) => {
     if (err) {
-      throw new Error("Error occured while processing report file");
+      throw new FileProcessingError(err);
     }
     endResult = result;
   });

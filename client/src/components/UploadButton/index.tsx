@@ -19,15 +19,26 @@ export default function UploadButton() {
       );
       return;
     }
-    console.log(file);
     const formData = new FormData();
     formData.append("file", file);
     axiosInstance
       .post("/api/reports/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
+      .catch((error) => {
+        const code = error.response.status;
+        if (code == 500) {
+          setModalMessage(
+            "Internal server error occured while processing file"
+          );
+        } else if (code == 400) {
+          setModalMessage("Invalid file uploaded");
+        } else {
+          setModalMessage("Unexpected error occured");
+        }
+      })
       .then((res) => {
-        setModalMessage(res.data);
+        if (res) setModalMessage(res.data);
       });
   }
 
