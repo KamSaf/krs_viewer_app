@@ -14,6 +14,6 @@ export class FileProcessingError extends ErrorBase {
 
 export class EmptyFileError extends ErrorBase {
   constructor(cause?: Error) {
-    super("Uploaded file is empty or does not exist", cause);
+    super("Uploaded file is empty", cause);
   }
 }

@@ -67,3 +67,4 @@ package-lock.json
 dist/
 volumes/
 /server/sample_data/
+/server/uploads
