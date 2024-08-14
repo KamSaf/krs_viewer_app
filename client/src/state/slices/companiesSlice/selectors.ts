@@ -1,3 +1,6 @@
 import { RootState } from "@state/store";
 
-export const selectCompanies = (state: RootState) => state.companies;
+export const selectCompanies = (state: RootState) => state.companies.companies;
+
+export const selectBreadcrumbCompany = (state: RootState) =>
+  state.companies.breadcrumbCompany;

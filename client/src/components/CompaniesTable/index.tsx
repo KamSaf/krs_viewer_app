@@ -22,7 +22,7 @@ export default function CompaniesTable() {
     dispatch(fetchCompanies());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const rows = useSelector(selectCompanies).companies;
+  const rows = useSelector(selectCompanies);
 
   return (
     <TableDiv>

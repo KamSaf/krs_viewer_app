@@ -4,6 +4,11 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { RootGrid } from "./style";
+import { selectBreadcrumbCompany } from "@state/slices/companiesSlice/selectors";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch } from "@state/store";
+import { useEffect } from "react";
+import { fetchCompany } from "@state/slices/companiesSlice/slice";
 
 interface LinkRouterProps extends LinkProps {
   state?: { companyId: number; companyName: string };
@@ -36,11 +41,19 @@ function createLink(to: string, label: string, isLast: boolean) {
 export default function NavBreadcrumbs() {
   const { company_id, report_id } = useParams();
   const pathnames = location.pathname.split("/");
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    if (company_id) {
+      dispatch(fetchCompany(company_id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const breadcrumbCompany = useSelector(selectBreadcrumbCompany);
 
   const pathPatterns: PathPattern[] = [
     {
       reg: /^\/companies\/\d+\/reports$/,
-      label: "COMPANY NAME",
+      label: breadcrumbCompany ? breadcrumbCompany.name : "N/A",
       url: `/companies/${company_id}/reports`,
     },
     {
