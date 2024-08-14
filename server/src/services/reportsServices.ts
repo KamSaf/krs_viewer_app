@@ -19,16 +19,16 @@ export async function processFile(
   if (!fileContent) {
     throw new EmptyFileError();
   }
-  let endResult = null;
-  parser.parseString(fileContent, (err, result) => {
-    if (err) {
-      throw new FileProcessingError(err);
-    }
-    endResult = Object.keys(result).includes("JednostkaMala")
-      ? (result as SmallUnitReport)
-      : (result as OtherUnitReport);
+  return new Promise((resolve, reject) => {
+    parser.parseString(fileContent, (err, result) => {
+      if (err) {
+        reject(new FileProcessingError(err));
+      }
+      resolve(
+        Object.keys(result).includes("JednostkaMala")
+          ? (result as SmallUnitReport)
+          : (result as OtherUnitReport)
+      );
+    });
   });
-  return endResult;
 }
-
-// TODO async xml parsing
