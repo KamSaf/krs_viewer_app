@@ -18,5 +18,3 @@ export async function getCompanyDetails(
   }
   return await findCompany(companyId);
 }
-
-// error handling

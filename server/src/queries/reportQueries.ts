@@ -8,3 +8,9 @@ export async function findReports(companyId: number): Promise<Report[]> {
     where: eq(ReportTable.companyId, companyId),
   });
 }
+
+export function findReport(id: number): Promise<Report | undefined> {
+  return db.query.ReportTable.findFirst({
+    where: eq(ReportTable.id, id),
+  });
+}

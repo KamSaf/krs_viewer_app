@@ -3,6 +3,8 @@ import { readFileContent } from "../utils";
 import { Parser, processors } from "xml2js";
 import { FileProcessingError, EmptyFileError } from "../errors/reportErrors";
 import { SmallUnitReport, OtherUnitReport } from "src/types/reportTypes";
+import { findReport } from "../queries/reportQueries";
+import type { Report } from "@common/types";
 
 export const reportsRouter = Router();
 
@@ -31,4 +33,13 @@ export async function processFile(
       );
     });
   });
+}
+
+export async function getReportDetails(
+  reportId: number
+): Promise<Report | undefined> {
+  if (isNaN(reportId)) {
+    return undefined;
+  }
+  return await findReport(reportId);
 }

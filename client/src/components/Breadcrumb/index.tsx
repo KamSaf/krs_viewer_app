@@ -9,6 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@state/store";
 import { useEffect } from "react";
 import { fetchCompany } from "@state/slices/companiesSlice/slice";
+import { selectViewedReport } from "@state/slices/reportsSlice/selectors";
+import { fetchReport } from "@state/slices/reportsSlice/slice";
+import dayjs from "dayjs";
 
 interface LinkRouterProps extends LinkProps {
   state?: { companyId: number; companyName: string };
@@ -46,10 +49,13 @@ export default function NavBreadcrumbs() {
     if (company_id) {
       dispatch(fetchCompany(company_id));
     }
+    if (report_id) {
+      dispatch(fetchReport(report_id));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const breadcrumbCompany = useSelector(selectBreadcrumbCompany);
-
+  const viewedReport = useSelector(selectViewedReport);
   const pathPatterns: PathPattern[] = [
     {
       reg: /^\/companies\/\d+\/reports$/,
@@ -58,7 +64,9 @@ export default function NavBreadcrumbs() {
     },
     {
       reg: /^\/companies\/\d+\/reports\/\d+$/,
-      label: "REPORT YEARS",
+      label: viewedReport
+        ? `Report for year ${dayjs(viewedReport.dateFrom).year()}`
+        : "N/A",
       url: `/companies/${company_id}/reports/${report_id}`,
     },
   ];

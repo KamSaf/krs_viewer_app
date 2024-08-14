@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Request, Response } from "express";
 import multer from "multer";
-import { processFile } from "../services/reportsServices";
+import { processFile, getReportDetails } from "../services/reportsServices";
 import { FileProcessingError, EmptyFileError } from "../errors/reportErrors";
 
 export const reportsRouter = Router();
@@ -24,3 +24,11 @@ reportsRouter.post(
     }
   }
 );
+
+reportsRouter.get("/details/:id", async (req: Request, res: Response) => {
+  const data = await getReportDetails(parseInt(req.params.id));
+  if (!data) {
+    res.status(404).json("Resource not found");
+  }
+  res.status(200).json(data);
+});

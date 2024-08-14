@@ -4,10 +4,12 @@ import axiosInstance from "@axiosInstance/instance";
 
 interface ReportsState {
   reports: Report[];
+  viewedReport: Report | null;
 }
 
 const initialState: ReportsState = {
   reports: [],
+  viewedReport: null,
 };
 
 export const fetchReports = createAsyncThunk(
@@ -20,6 +22,14 @@ export const fetchReports = createAsyncThunk(
   }
 );
 
+export const fetchReport = createAsyncThunk(
+  "reports/fetchReport",
+  async (id: string) => {
+    const response = await axiosInstance.get(`/api/reports/details/${id}`);
+    return response.data;
+  }
+);
+
 const reportsSlice = createSlice({
   name: "reports",
   initialState: initialState,
@@ -27,6 +37,9 @@ const reportsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchReports.fulfilled, (state, action) => {
       state.reports = action.payload;
+    });
+    builder.addCase(fetchReport.fulfilled, (state, action) => {
+      state.viewedReport = action.payload;
     });
   },
 });
